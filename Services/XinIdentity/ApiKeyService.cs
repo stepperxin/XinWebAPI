@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MySQLIdentityWebAPI.Data;
-using MySQLIdentityWebAPI.Models.Identity;
+using XinWebAPI.Data.XinIdentity;
+using XinWebAPI.Models.XinIdentity;
 
-namespace MySQLIdentityWebAPI.Services
+namespace XinWebAPI.Services.XinIdentity
 {
     public class ApiKeyService
     {
-        private readonly ApplicationDBContext _context;
+        private readonly XinIdentityDBContext _context;
 
-        public ApiKeyService(ApplicationDBContext context)
+        public ApiKeyService(XinIdentityDBContext context)
         {
             _context = context;
         }

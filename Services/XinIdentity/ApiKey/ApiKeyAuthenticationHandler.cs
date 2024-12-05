@@ -2,25 +2,25 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using MySQLIdentityWebAPI.Data;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
+using XinWebAPI.Data.XinIdentity;
 
-namespace MySQLIdentityWebAPI.Services.ApiKey
+namespace XinWebAPI.Services.XinIdentity.ApiKey
 {
     class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         // https://gowthamcbe.com/2022/02/21/swagger-ui-for-api-key-authentication-flow-with-net-core-6/
         private const string API_KEY_HEADER = "ApiKey";
 
-        private readonly ApplicationDBContext _context;
+        private readonly XinIdentityDBContext _context;
 
         public ApiKeyAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock,
-            ApplicationDBContext context
+            XinIdentityDBContext context
         ) : base(options, logger, encoder, clock)
         {
             _context = context;

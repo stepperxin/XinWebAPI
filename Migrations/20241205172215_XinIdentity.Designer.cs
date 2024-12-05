@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MySQLIdentityWebAPI.Data;
+using XinWebAPI.Data.XinIdentity;
 
 #nullable disable
 
-namespace MySQLIdentityWebAPI.Migrations
+namespace XinWebAPI.Migrations
 {
-    [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(XinIdentityDBContext))]
+    [Migration("20241205172215_XinIdentity")]
+    partial class XinIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,7 +221,7 @@ namespace MySQLIdentityWebAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MySQLIdentityWebAPI.Models.Identity.UserApiKey", b =>
+            modelBuilder.Entity("XinWebAPI.Models.XinIdentity.UserApiKey", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -295,7 +298,7 @@ namespace MySQLIdentityWebAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MySQLIdentityWebAPI.Models.Identity.UserApiKey", b =>
+            modelBuilder.Entity("XinWebAPI.Models.XinIdentity.UserApiKey", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()

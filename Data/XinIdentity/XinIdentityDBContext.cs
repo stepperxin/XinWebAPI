@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MySQLIdentityWebAPI.Models.Identity;
+using XinWebAPI.Models.XinIdentity;
 using System.Net;
 
-namespace MySQLIdentityWebAPI.Data
+namespace XinWebAPI.Data.XinIdentity
 {
-    public class ApplicationDBContext : IdentityDbContext<IdentityUser>
+    public class XinIdentityDBContext : IdentityDbContext<IdentityUser>
     {
 
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> context) : base(context)
+        public XinIdentityDBContext(DbContextOptions<XinIdentityDBContext> context) : base(context)
         {
         }
 

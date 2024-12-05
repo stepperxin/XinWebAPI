@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Text;
-using MySQLIdentityWebAPI.Services.ApiKey;
-using MySQLIdentityWebAPI.Models.Identity;
+using XinWebAPI.Services.XinIdentity.ApiKey;
+using XinWebAPI.Models.XinIdentity;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 
-namespace MySQLIdentityWebAPI.Services
+namespace XinWebAPI.Services.XinIdentity
 {
     public class JwtService
     {

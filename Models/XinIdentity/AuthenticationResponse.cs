@@ -1,4 +1,4 @@
-﻿namespace MySQLIdentityWebAPI.Models.Identity
+﻿namespace XinWebAPI.Models.XinIdentity
 {
     public class AuthenticationResponse
     {

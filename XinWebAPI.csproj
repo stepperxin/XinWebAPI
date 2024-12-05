@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\SQLScript\XinIdentity\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

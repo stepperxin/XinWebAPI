@@ -1,5 +1,4 @@
-﻿namespace MySQLIdentityWebAPI.Controllers.Identity
-{
+﻿
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -7,10 +6,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
-    using global::MySQLIdentityWebAPI.Services;
-    using global::MySQLIdentityWebAPI.Models.Identity;
+    using global::XinWebAPI.Services.XinIdentity;
+    using global::XinWebAPI.Models.XinIdentity;
 
-    namespace MySQLIdentityWebAPI.Controllers.Identity
+    namespace XinWebAPI.Controllers.XinIdentity
     {
         [Route("api/[controller]")]
         [ApiController]
@@ -28,6 +27,7 @@
             )
             {
                 _userManager = userManager;
+                _roleManager = roleManager;
                 _jwtService = jwtService;
                 _apiKeyService = apiKeyService;
             }
@@ -131,4 +131,4 @@
         }
     }
 
-}
+

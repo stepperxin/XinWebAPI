@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace MySQLIdentityWebAPI.Models.Identity
+namespace XinWebAPI.Models.XinIdentity
 {
     [Index(nameof(Value), IsUnique = true)]
     public class UserApiKey

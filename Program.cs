@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MySQLIdentityWebAPI.Data;
-using MySQLIdentityWebAPI.Services;
-using MySQLIdentityWebAPI.Services.ApiKey;
 using System.Text;
+using XinWebAPI.Services.XinIdentity;
+using XinWebAPI.Services.XinIdentity.ApiKey;
+using XinWebAPI.Data.XinIdentity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("defaultConnection");
-builder.Services.AddDbContextPool<ApplicationDBContext>(options => {
+builder.Services.AddDbContextPool<XinIdentityDBContext>(options => {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
@@ -33,7 +33,7 @@ builder.Services.AddIdentityCore<IdentityUser>(options => {
                 })
                 .AddRoles<IdentityRole>()
                 .AddRoleManager<RoleManager<IdentityRole>>()
-                .AddEntityFrameworkStores<ApplicationDBContext>();
+                .AddEntityFrameworkStores<XinIdentityDBContext>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -44,10 +44,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidAudience = builder.Configuration["Jwt:Audience"],
-                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["XinIdentity:Jwt:Audience"],
+                        ValidIssuer = builder.Configuration["XinIdentity:Jwt:Issuer"],
                         IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
+                            Encoding.UTF8.GetBytes(builder.Configuration["XinIdentity:Jwt:Key"])
                         )
                     };
                 })
