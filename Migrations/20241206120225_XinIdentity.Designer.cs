@@ -12,7 +12,7 @@ using XinWebAPI.Data.XinIdentity;
 namespace XinWebAPI.Migrations
 {
     [DbContext(typeof(XinIdentityDBContext))]
-    [Migration("20241205172215_XinIdentity")]
+    [Migration("20241206120225_XinIdentity")]
     partial class XinIdentity
     {
         /// <inheritdoc />

@@ -17,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("defaultConnection");
+var connectionString = builder.Configuration.GetConnectionString(builder.Configuration["CurrentDB"]);
 builder.Services.AddDbContextPool<XinIdentityDBContext>(options => {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
