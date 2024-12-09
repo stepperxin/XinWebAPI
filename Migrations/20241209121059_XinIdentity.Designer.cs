@@ -12,7 +12,7 @@ using XinWebAPI.Data.XinIdentity;
 namespace XinWebAPI.Migrations
 {
     [DbContext(typeof(XinIdentityDBContext))]
-    [Migration("20241206120225_XinIdentity")]
+    [Migration("20241209121059_XinIdentity")]
     partial class XinIdentity
     {
         /// <inheritdoc />
@@ -221,32 +221,6 @@ namespace XinWebAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("XinWebAPI.Models.XinIdentity.UserApiKey", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserID");
-
-                    b.HasIndex("Value")
-                        .IsUnique();
-
-                    b.ToTable("UserApiKeys");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -296,17 +270,6 @@ namespace XinWebAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("XinWebAPI.Models.XinIdentity.UserApiKey", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

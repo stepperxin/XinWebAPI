@@ -6,14 +6,14 @@ using System.Net;
 
 namespace XinWebAPI.Data.XinIdentity
 {
-    public class XinIdentityDBContext : IdentityDbContext<IdentityUser>
+    public class XinIdentityDBContext : IdentityDbContext<XinUser>
     {
 
         public XinIdentityDBContext(DbContextOptions<XinIdentityDBContext> context) : base(context)
         {
         }
 
-        public DbSet<UserApiKey> UserApiKeys { get; set; }
+        //public DbSet<UserApiKey> UserApiKeys { get; set; }
         //// register the classes
         //public DbSet<Student> Student { get; set; }
         //public DbSet<Address> Address { get; set; }

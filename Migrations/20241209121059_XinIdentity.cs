@@ -196,29 +196,6 @@ namespace XinWebAPI.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateTable(
-                name: "UserApiKeys",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Value = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserID = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserApiKeys", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_UserApiKeys_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -255,17 +232,6 @@ namespace XinWebAPI.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserApiKeys_UserID",
-                table: "UserApiKeys",
-                column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserApiKeys_Value",
-                table: "UserApiKeys",
-                column: "Value",
-                unique: true);
         }
 
         /// <inheritdoc />
@@ -285,9 +251,6 @@ namespace XinWebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "UserApiKeys");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
