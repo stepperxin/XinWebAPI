@@ -4,11 +4,22 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Text;
 using XinWebAPI.Data.XinIdentity;
 using XinWebAPI.Models.XinIdentity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Add Logger
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
 
 // Add services to the container.
 
@@ -43,42 +54,6 @@ builder.Services.AddDbContextPool<XinIdentityDBContext>(options => {
 // XinIdentity
 builder.Services.AddIdentityApiEndpoints<XinUser>()
     .AddEntityFrameworkStores<XinIdentityDBContext>();
-
-//builder.Services.AddIdentityCore<IdentityUser>(options => {
-//                    options.SignIn.RequireConfirmedAccount = false;
-//                    options.User.RequireUniqueEmail = true;
-//                    options.Password.RequireDigit = false;
-//                    options.Password.RequiredLength = 6;
-//                    options.Password.RequireNonAlphanumeric = false;
-//                    options.Password.RequireUppercase = false;
-//                    options.Password.RequireLowercase = false;
-//                })
-//                .AddRoles<IdentityRole>()
-//                .AddRoleManager<RoleManager<IdentityRole>>()
-//                .AddEntityFrameworkStores<XinIdentityDBContext>();
-
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//                .AddJwtBearer(options =>
-//                {
-//                    options.TokenValidationParameters = new TokenValidationParameters()
-//                    {
-//                        ValidateIssuer = true,
-//                        ValidateAudience = true,
-//                        ValidateLifetime = true,
-//                        ValidateIssuerSigningKey = true,
-//                        ValidAudience = builder.Configuration["XinIdentity:Jwt:Audience"],
-//                        ValidIssuer = builder.Configuration["XinIdentity:Jwt:Issuer"],
-//                        IssuerSigningKey = new SymmetricSecurityKey(
-//                            Encoding.UTF8.GetBytes(builder.Configuration["XinIdentity:Jwt:Key"])
-//                        )
-//                    };
-//                })
-//                .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(
-//                    "ApiKey",
-//                    options => { }
-//                );
-//builder.Services.AddScoped<JwtService>();
-//builder.Services.AddScoped<ApiKeyService>();
 
 var app = builder.Build();
 
