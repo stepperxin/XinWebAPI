@@ -10,8 +10,8 @@ DB Context: are the bridge to che DB Data
 
 DB Install:
 - Code First: please use the following commands from Package Manager Console
-    Add-Migration 'Name' -Context $DBContextName$
-    Update-Database -Context $DBContextName$
+    - Add-Migration 'Name' -Context $DBContextName$
+    - Update-Database -Context $DBContextName$
   
 SQL Script: locate the folders under Data -> SQL Scripts and run them following the order specified in the name: 01.XinIdentity...
 
