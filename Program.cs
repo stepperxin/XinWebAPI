@@ -6,8 +6,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
+using XinWebAPI.Data.PlayGround;
 using XinWebAPI.Data.XinIdentity;
 using XinWebAPI.Models.XinIdentity;
+using XinWebAPI.Services.PlayGround;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,14 +48,37 @@ builder.Services.AddSwaggerGen(c => {
     });
 });
 
-var connectionString = builder.Configuration.GetConnectionString(builder.Configuration["CurrentDB"]);
-builder.Services.AddDbContextPool<XinIdentityDBContext>(options => {
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-});
+var connectionString = builder.Configuration.GetConnectionString(builder.Configuration["CurrentDBContext"]);
 
-// XinIdentity
-builder.Services.AddIdentityApiEndpoints<XinUser>()
-    .AddEntityFrameworkStores<XinIdentityDBContext>();
+if (builder.Configuration["CurrentDBContext"] == "PlayGroundDBContext")
+{
+    builder.Services.AddDbContextPool<PlayGroundDBContext>(options => {
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    });
+
+    // XinIdentity
+    builder.Services.AddIdentityApiEndpoints<XinUser>()
+        .AddEntityFrameworkStores<PlayGroundDBContext>();
+}
+else
+{
+    builder.Services.AddDbContextPool<XinIdentityDBContext>(options => {
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    });
+
+    // XinIdentity
+    builder.Services.AddIdentityApiEndpoints<XinUser>()
+        .AddEntityFrameworkStores<XinIdentityDBContext>();
+}
+
+
+
+builder.Services.AddAutoMapper(typeof(Program));
+
+// Map PlayGround Services
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
 
 var app = builder.Build();
 

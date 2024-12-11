@@ -13,16 +13,14 @@ namespace XinWebAPI.Data.XinIdentity
         {
         }
 
-        //public DbSet<UserApiKey> UserApiKeys { get; set; }
-        //// register the classes
-        //public DbSet<Student> Student { get; set; }
-        //public DbSet<Address> Address { get; set; }
-        //public DbSet<Customer> Customer { get; set; }
+        public XinIdentityDBContext(DbContextOptions options) : base(options)
+        {
+        }
 
-        //public DbSet<IdentityUser> IdentityUser { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //public DbSet<XinPublisher> XinPublisher { get; set; }
-
-
+        }
     }
 }
