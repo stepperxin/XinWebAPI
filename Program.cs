@@ -79,6 +79,18 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
+// Manage CORS issue
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins(builder.Configuration["AllowedAppEndPoint"])
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
+});
 
 var app = builder.Build();
 
@@ -93,6 +105,10 @@ app.UseHttpsRedirection();
 
 // XinIdentity
 app.MapGroup("api/xinidentity").MapIdentityApi<XinUser>();
+
+
+//UseCors must be placed after "UseRouting", but before "UseAuthorization"
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

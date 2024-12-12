@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using XinWebAPI.Models.DTO.PlayGround;
 using XinWebAPI.Models.PlayGround;
 using XinWebAPI.Services.PlayGround;
@@ -7,6 +8,7 @@ namespace XinWebAPI.Controllers.PlayGround
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
@@ -16,6 +18,7 @@ namespace XinWebAPI.Controllers.PlayGround
         }
 
         [HttpGet("all")]
+        //[AllowAnonymous]
         public async Task<IActionResult> getCustomers()
         {
             var customer = await _customerService.getAllCustomersAsync();
